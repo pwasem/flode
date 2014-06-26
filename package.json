@@ -1,0 +1,33 @@
+{
+    "name": "flode",
+    "version": "0.1.1",
+    "description": "A node.js module for asynchronous flow control with error handling and data forwarding",
+    "main": "index.js",
+    "keywords": [
+        "flow",
+        "node",
+        "flode",
+        "control",
+        "asynchronous",
+        "serial",
+        "parallel",
+        "error",
+        "handling",
+        "data",
+        "forwarding"
+    ],
+    "dependencies": {},
+    "engine": "v0.10.29",
+    "author": {
+        "name": "Pascal Wasem",
+        "email": "pascal.wasem@googlemail.com",
+        "url": "http://github.com/pwasem"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pwasem/flode"
+    },
+    "license": "MIT",
+    "private": false,
+    "readmeFilename": "README.md"
+}
