@@ -1,7 +1,7 @@
 flode
 ============
 
-A hybrid module for asynchronous flow control with error handling and data forwarding.
+A node.js module for asynchronous flow control with error handling and data forwarding.
 Please check jsdoc for detailed module documentation.
 
 serial example
