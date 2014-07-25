@@ -118,6 +118,17 @@ var flode = function () {
 
         };
 
+        // tasks array empty
+        if (options.tasks.length === 0)  {
+
+            options.tasks.push(function(data, done)  {
+
+                done(new Error('No tasks given'));
+
+            });
+
+        }
+
         // execute tasks parallel
         options.tasks.forEach(function (task) {
 
