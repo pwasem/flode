@@ -1,161 +1,110 @@
-flode
-============
+# flode
 
 A node.js module for asynchronous flow control with error handling and data forwarding.
-Please check jsdoc for detailed module documentation.
+So by using this module you can execute several async functions one after another (serial) or simultaneously (parallel).
+You can create a jsdoc for a detailed module documentation.
 
-serial example
-============
-```
+## serial example
 
-       var flode = require('flode');
-       
-       var timers = require('timers');
-       
-       var wait = function(seconds,callback) {
-       
-           setTimeout(function () {
-       
-              callback();
-       
-           }, 1000 * seconds);
-       
-       };
-       
-       var serialTasks = [
-       
-           function (data, next) {
-       
-               wait(1, function () {
-       
-                   data = data + 1;
-                   next(null, data);
-       
-               });
-       
-           }, function (data, next) {
-       
-               wait(2, function () {
-       
-                   data = data + 2;
-                   next(null, data); //next(new Error('some error'));
-       
-               });
-       
-       
-           }, function (data, next) {
-       
-               wait(3, function () {
-       
-                   data = data + 3;
-                   next(null, data);
-       
-               });
-           }
-       ];
-       
-       var serialOptions = {
-       
-           'tasks': serialTasks,
-           'data': 0
-       };
-       
-       flode.serial(serialOptions, function (error, data) {
-       
-           if (error) {
-       
-               console.error('Serial: ' + error);
-       
-           } else {
-       
-               console.log('Serial: ' + data);
-           }
-       
-       });
+    var flode = require('flode');
+    
+    var serialFlow = {
+    
+        'data' : {
+    
+            'first': false,
+            'second': false
+        },
+        'tasks' : [
+    
+            function (data, next) {
+    
+                // minipulate data
+                data.first = true;
+    
+                var error = null;
+                // error = new Error('some error in first function');
+    
+                // forward data to next function
+                next(error, data);
+            },
+            function (data, next) {
+    
+                data.second = true;
+    
+                next(null, data);
+            }
+        ]
+    };
+    
+    flode.serial(serialFlow,function(error, data) {
+    
+        if (error) {
+    
+            console.error(error);
+    
+        } else {
+    
+            console.log(data);
+    
+        }
+    });
 
-```
+## parallel example
 
-parallel example
-============
-```
-       
-       var flode = require('flode');
-       
-       var timers = require('timers');
-       
-       var wait = function(seconds,callback) {
-       
-           setTimeout(function () {
-       
-              callback();
-       
-           }, 1000 * seconds);
-       
-       };
-       
-       var parallelTasks = [
-       
-           function (data, done) {
-       
-               wait(1, function() {
-       
-                   data.push(1);
-                   done();
-       
-               });
-       
-           }, function (data, done) {
-       
-               wait(2, function() {
-       
-                   data.push(2);
-                   done(); //done(new Error('some error'));
-       
-               });
-       
-           }, function (data, done) {
-       
-               wait(3, function() {
-       
-                   data.push(3);
-                   done();
-       
-               });
-           }
-       ];
-       
-       var parallelOptions = {
-       
-           'tasks': parallelTasks,
-           'data': []
-       
-       };
-       
-       flode.parallel(parallelOptions, function (errors, data) {
-       
-           if (Array.isArray(errors)) {
-       
-               errors.forEach(function (error) {
-       
-                   console.error('Parallel: ' + error);
-       
-               });
-       
-           } else {
-       
-               var result = 0;
-               data.forEach(function (number) {
-       
-                   result += number;
-               });
-       
-               console.log('Parallel: ' + result);
-       
-           }
-       });
+    var flode = require('flode');
 
-```
-
-
+    var parallelFlow = {
+    
+        'data' : {
+    
+            'first': false,
+            'second': false,
+            'third': false
+        },
+        'tasks' : [
+    
+            function (data, done) {
+    
+                // minipulate data
+                data.first = true;
+    
+                var error = null;
+                // error = new Error('some error in first function');
+    
+                // indicate that this function is done (others might still be running)
+                done(error);
+            },
+            function (data, done) {
+    
+                data.second = true;
+    
+                done();
+            },
+            function (data, done) {
+    
+                data.third = true;
+    
+                done();
+            }
+        ]
+    };
+    
+    flode.parallel(parallelFlow, function (errors, data) {
+    
+        // we cannot know how many errors might have occurred
+        if (Array.isArray(errors)) {
+    
+            errors.forEach(function (error) {
+    
+                console.error(error);
+            });
+    
+        } else {
+    
+            console.log(data);
+    
+        }
+    });
 
 
