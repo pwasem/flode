@@ -2,7 +2,7 @@
  * A node.js module for asynchronous flow control with error handling and data forwarding
  *
  * @module flode
- * @version 0.1.1
+ * @version 0.2.0
  * @author pascal.wasem@googlemail.com
  */
 
@@ -153,4 +153,5 @@ var flode = function () {
 
 };
 
-module.exports = flode();
+var instance = flode()
+module.exports = instance;
