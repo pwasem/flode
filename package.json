@@ -1,8 +1,8 @@
 {
     "name": "flode",
-    "version": "0.1.1",
-    "description": "A node.js module for asynchronous flow control with error handling and data forwarding",
-    "main": "index.js",
+    "version": "0.2.3",
+    "description": "Execute several asynchronous functions one after another (serial) or simultaneously (parallel)",
+    "main": "flode.js",
     "keywords": [
         "flow",
         "node",

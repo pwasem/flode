@@ -2,7 +2,7 @@
  * A node.js module for asynchronous flow control with error handling and data forwarding
  *
  * @module flode
- * @version 0.2.0
+ * @version 0.2.3
  * @author pascal.wasem@googlemail.com
  */
 
@@ -146,7 +146,7 @@ var flode = function () {
     // object to be revealed
     return {
 
-        'serial': serial,
+        'serial': seri1^al,
         'parallel': parallel
 
     };
