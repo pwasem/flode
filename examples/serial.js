@@ -2,12 +2,12 @@ var flode = require(__dirname + '/../flode.js');
 
 var serialFlow = {
 
-    'data' : {
+    'data': {
 
         'first': false,
         'second': false
     },
-    'tasks' : [
+    'tasks': [
 
         function (data, next) {
 
@@ -29,7 +29,7 @@ var serialFlow = {
     ]
 };
 
-flode.serial(serialFlow,function(error, data) {
+flode.serial(serialFlow, function (error, data) {
 
     if (error) {
 

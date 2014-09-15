@@ -2,13 +2,13 @@ var flode = require(__dirname + '/../flode.js');
 
 var parallelFlow = {
 
-    'data' : {
+    'data': {
 
         'first': false,
         'second': false,
         'third': false
     },
-    'tasks' : [
+    'tasks': [
 
         function (data, done) {
 
@@ -49,7 +49,6 @@ flode.parallel(parallelFlow, function (errors, data) {
     } else {
 
         console.log(data);
-
     }
 });
 

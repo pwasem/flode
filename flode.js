@@ -2,7 +2,7 @@
  * A node.js module for asynchronous flow control with error handling and data forwarding
  *
  * @module flode
- * @version 0.2.3
+ * @version 0.2.5
  * @author pascal.wasem@googlemail.com
  */
 
@@ -118,12 +118,19 @@ var flode = function () {
 
         };
 
-        // execute tasks parallel
-        options.tasks.forEach(function (task) {
 
-            task(options.data, done);
+        if (options.tasks.length > 0) {
 
-        });
+            // execute tasks parallel
+            options.tasks.forEach(function (task) {
+
+                task(options.data, done);
+            });
+
+        } else {
+
+            callback(null, options.data);
+        }
 
     };
 

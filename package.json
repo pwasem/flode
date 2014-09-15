@@ -1,6 +1,6 @@
 {
     "name": "flode",
-    "version": "0.2.3",
+    "version": "0.2.5",
     "description": "Execute several asynchronous functions one after another (serial) or simultaneously (parallel)",
     "main": "flode.js",
     "keywords": [
