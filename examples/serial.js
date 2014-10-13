@@ -9,7 +9,7 @@ var serialFlow = {
     },
     'tasks': [
 
-        function (data, next) {
+        function (data, next, abort) {
 
             // minipulate data
             data.first = true;
@@ -19,8 +19,12 @@ var serialFlow = {
 
             // forward data to next function
             next(error, data);
+
+            // or abort flow and skip all following tasks
+            //abort(error, data);
+
         },
-        function (data, next) {
+        function (data, next, abort) {
 
             data.second = true;
 

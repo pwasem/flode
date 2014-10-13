@@ -2,7 +2,7 @@
 
 A node.js module for asynchronous flow control with error handling and data forwarding.
 So by using this module you can execute several async functions one after another (serial) or simultaneously (parallel).
-You can create a jsdoc for a detailed module documentation.
+You can create a jsdoc for a detailed module documentation. Also check the examples folder.
 
 ## serial example
 
@@ -17,7 +17,7 @@ You can create a jsdoc for a detailed module documentation.
         },
         'tasks' : [
     
-            function (data, next) {
+            function (data, next, abort) {
     
                 // minipulate data
                 data.first = true;
@@ -27,8 +27,11 @@ You can create a jsdoc for a detailed module documentation.
     
                 // forward data to next function
                 next(error, data);
+                
+                // or abort flow and skip all following tasks
+                //abort(error, data);
             },
-            function (data, next) {
+            function (data, next, abort) {
     
                 data.second = true;
     

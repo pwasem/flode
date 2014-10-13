@@ -2,7 +2,7 @@
  * A node.js module for asynchronous flow control with error handling and data forwarding
  *
  * @module flode
- * @version 0.3.0
+ * @version 0.4.0
  * @author pascal.wasem@googlemail.com
  */
 
@@ -23,6 +23,20 @@ var flode = function () {
      * @param {module:flode~serialCallback} callback <code>callback</code> to be executed on errors or when all tasks are completed
      */
     var serial = function (options, callback) {
+
+        /**
+         * Function for immediate abortion of a serial flow by skipping all following tasks
+         *
+         * @memberof module:flode
+         * @inner
+         *
+         * @param {object} error <code>error</code> if any has occurred; <code>null</code> otherwise
+         * @param {string|number|boolean|array|object|null} [data] <code>data</code> to be forwarded
+         */
+        var abort = function(error, data) {
+
+            callback(error, data);
+        };
 
         /**
          * Callback function for tasks within serial flows
@@ -51,7 +65,7 @@ var flode = function () {
                 if (typeof nextTask === 'function') {
 
                     // run next task
-                    nextTask(data, next);
+                    nextTask(data, next, abort);
 
                     // all tasks done
                 } else {
@@ -63,7 +77,7 @@ var flode = function () {
         };
 
         // start first task
-        next(null, options.data);
+        next(null, options.data, abort);
     };
 
     /**
