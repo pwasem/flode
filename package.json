@@ -1,0 +1,33 @@
+{
+    "name": "flode",
+    "version": "0.4.0",
+    "description": "Execute several asynchronous functions one after another (serial) or simultaneously (parallel)",
+    "main": "flode.js",
+    "keywords": [
+        "flow",
+        "node",
+        "flode",
+        "control",
+        "asynchronous",
+        "serial",
+        "parallel",
+        "error",
+        "handling",
+        "data",
+        "forwarding"
+    ],
+    "dependencies": {},
+    "engine": "v0.10.29",
+    "author": {
+        "name": "Pascal Wasem",
+        "email": "pascal.wasem@googlemail.com",
+        "url": "http://github.com/pwasem"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pwasem/flode"
+    },
+    "license": "MIT",
+    "private": false,
+    "readmeFilename": "README.md"
+}
